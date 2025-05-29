@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>org.example</groupId>
 	<artifactId>summerHackaton</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.0</version>
 	<name>summerHackaton</name>
 	<description>summerHackaton</description>
 	<url/>
