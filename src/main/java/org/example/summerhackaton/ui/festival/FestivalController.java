@@ -28,5 +28,12 @@ public class FestivalController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Festival> getAllFestivals() {
+
+    }
+
 }
 

@@ -1,14 +1,16 @@
 package org.example.summerhackaton.domain.model.user;
 
 import lombok.*;
+import org.example.summerhackaton.domain.model.products.factory.Product;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.math.BigDecimal;
+import java.util.List;
 import java.util.Set;
 
 @Document(collection = "user_login")
-@Getter
-@Setter
+@Data
 @Builder
 @ToString
 @NoArgsConstructor
@@ -16,7 +18,6 @@ import java.util.Set;
 public class UserEntity {
     @Id
     private String id;
-
     private String username;
     private String password;
     private String email;
@@ -24,10 +25,8 @@ public class UserEntity {
     private String codigo;
     private Set<RolesEntity> roles;
 
-    public UserEntity(String username, String password, Set<RolesEntity> roles) {
-        this.username = username;
-        this.password = password;
-        this.roles = roles;
-        this.enabled = true;
-    }
+
+    private List<Product> boughtProducts;
+    private BigDecimal balance;
+
 }
