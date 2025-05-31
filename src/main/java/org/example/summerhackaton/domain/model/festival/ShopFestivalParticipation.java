@@ -11,9 +11,8 @@ import java.util.List;
 public class ShopFestivalParticipation {
     private String festivalId;
     private LocalDate setupDate;
-    private String boothLocation;
+    private String shopId;
     private double earnings;
-    private List<String> productTypesSold;
 
     public ShopFestivalParticipation() {
         super();
