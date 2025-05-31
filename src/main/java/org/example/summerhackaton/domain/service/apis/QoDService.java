@@ -1,8 +1,6 @@
 package org.example.summerhackaton.domain.service.apis;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
-import org.example.summerhackaton.domain.model.apisModel.IPv4Address;
+
 import org.example.summerhackaton.domain.model.apisModel.QoDSessionListResponse;
 import org.example.summerhackaton.domain.model.apisModel.QoDSessionRequest;
 import org.example.summerhackaton.domain.model.apisModel.QoDSessionResponse;

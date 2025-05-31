@@ -1,13 +1,18 @@
 package org.example.summerhackaton.domain.model.apisModel;
 
-import org.example.summerhackaton.domain.service.apis.QoDService;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class QoDSessionRequest {
     private Device device;
     private ApplicationServer applicationServer;
-    private DevicePorts devicePorts; // Opcional
-    private ApplicationServerPorts applicationServerPorts; // Opcional
     private String qosProfile;
-    private Webhook webhook; // Opcional
-    private Integer duration; // Opcional (default 86400)
+    private Webhook webhook;
+    private Integer duration;
+    private String asId;
 }
