@@ -4,7 +4,6 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import org.example.summerhackaton.common.Constantes;
 import org.example.summerhackaton.domain.service.authentication.JwtService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

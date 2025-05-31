@@ -1,7 +1,6 @@
 package org.example.summerhackaton.ui;
 
 import lombok.RequiredArgsConstructor;
-
 import org.example.summerhackaton.common.Constantes;
 import org.example.summerhackaton.domain.model.Token;
 import org.example.summerhackaton.domain.service.authentication.JwtService;
