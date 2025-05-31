@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 
 @RestController
+@RequestMapping("/api/1.0")
 public class LoginController {
     private final ServicioLogin servicioLogin;
 
