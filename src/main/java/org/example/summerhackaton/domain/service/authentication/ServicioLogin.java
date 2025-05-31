@@ -19,8 +19,8 @@ public class ServicioLogin {
     private final PasswordHash encriptar;
     private final UserDetailsService userDetailsService;
     private final UserRepository userRepository;
-    private JwtService jwtService;
-    private RolesRepository rolesRepository;
+    private final JwtService jwtService;
+    private final RolesRepository rolesRepository;
 
     public ServicioLogin(
             JwtService jwtService,

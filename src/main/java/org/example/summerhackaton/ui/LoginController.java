@@ -25,7 +25,7 @@ public class LoginController {
     }
 
     @GetMapping(Constantes.PATH_ACTIVATE + "{codigo}")
-    public ResponseEntity<Boolean> activateAccount(@PathVariable String codigo ) {
+    public ResponseEntity<Boolean> activateAccount(@PathVariable String codigo) {
         servicioLogin.activate(codigo);
         return ResponseEntity.ok(true);
     }
