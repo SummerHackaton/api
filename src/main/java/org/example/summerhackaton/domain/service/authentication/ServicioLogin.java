@@ -4,7 +4,6 @@ import org.example.summerhackaton.common.PasswordHash;
 import org.example.summerhackaton.dao.RolesRepository;
 import org.example.summerhackaton.dao.UserRepository;
 import org.example.summerhackaton.domain.model.Token;
-import org.example.summerhackaton.domain.model.user.RolesEntity;
 import org.example.summerhackaton.domain.model.user.UserEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;

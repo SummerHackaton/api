@@ -1,4 +1,4 @@
-package org.example.summerhackaton.domain.model.security;
+package org.example.summerhackaton.domain.model.open_gateway_authentication;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

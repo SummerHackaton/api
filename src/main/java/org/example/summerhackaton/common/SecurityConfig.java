@@ -1,6 +1,5 @@
 package org.example.summerhackaton.common;
 
-import lombok.RequiredArgsConstructor;
 import org.example.summerhackaton.filters.TokenFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,7 +1,8 @@
 package org.example.summerhackaton.domain.service.open_gateway;
 
-import org.example.summerhackaton.domain.model.security.CIBAAuthorizationResponse;
-import org.example.summerhackaton.domain.model.security.OpenGatewayToken;
+import lombok.RequiredArgsConstructor;
+import org.example.summerhackaton.domain.model.open_gateway_authentication.CIBAAuthorizationResponse;
+import org.example.summerhackaton.domain.model.open_gateway_authentication.OpenGatewayToken;
 import org.example.summerhackaton.domain.service.security.KeyStoreService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -13,6 +14,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 @Service
+@RequiredArgsConstructor
 public class OpenGatewayAuthenticationService {
 
     @Value("${telefonica.client-id}")
@@ -30,16 +32,14 @@ public class OpenGatewayAuthenticationService {
     @Value("${security.token-password}")
     private String tokenPassword;
 
-    private final RestTemplate restTemplate = new RestTemplate();
-    private static final String AUTH_URL = "https://sandbox.opengateway.telefonica.com/apigateway/bc-authorize";
-    private static final String TOKEN_URL = "https://sandbox.opengateway.telefonica.com/apigateway/token";
+    private final RestTemplate restTemplate;
     private final KeyStoreService keyStoreService;
 
-    public OpenGatewayAuthenticationService(KeyStoreService keyStoreService) {
-        this.keyStoreService = keyStoreService;
-    }
+    private static final String AUTH_URL = "https://sandbox.opengateway.telefonica.com/apigateway/bc-authorize";
+    private static final String TOKEN_URL = "https://sandbox.opengateway.telefonica.com/apigateway/token";
 
-    public OpenGatewayToken getAccessToken() {
+
+    public OpenGatewayToken getToken() {
         // Step 1: Get auth_req_id
         CIBAAuthorizationResponse authResponse = getAuthReqId();
 
@@ -62,7 +62,6 @@ public class OpenGatewayAuthenticationService {
         body.add("scope", purpose);
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(body, headers);
-
         return restTemplate.postForObject(AUTH_URL, request, CIBAAuthorizationResponse.class);
     }
 

@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(Constantes.PATH_REFRESH_TOKEN)
+@RequestMapping("/api/1.0")
 @RequiredArgsConstructor
 public class AuthController {
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
 
-    @PostMapping
+    @PostMapping(Constantes.PATH_REFRESH_TOKEN)
     public ResponseEntity<Token> refreshToken(@RequestParam("refreshToken") String refreshToken) {
         String username = jwtService.extractUsername(refreshToken);
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
