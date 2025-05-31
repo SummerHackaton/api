@@ -71,21 +71,19 @@ public class KeyStoreService {
 
     private KeyStore loadKeyStore() throws KeyStoreException, IOException,
             CertificateException, NoSuchAlgorithmException {
+
         KeyStore keyStore = KeyStore.getInstance(keyStoreType);
         File keystoreFile = new File(keyStorePath);
 
-        if (!keystoreFile.exists() || keystoreFile.length() == 0) {
-            logger.info("Inicializando nuevo keystore...");
-            initializeKeyStore();
-            keyStore.load(null, keyStorePassword.toCharArray());
-            try (FileOutputStream fos = new FileOutputStream(keystoreFile)) {
-                keyStore.store(fos, keyStorePassword.toCharArray());
-            }
-        } else {
-            try (FileInputStream fis = new FileInputStream(keystoreFile)) {
-                keyStore.load(fis, keyStorePassword.toCharArray());
-            }
+        if (!keystoreFile.exists()) {
+            logger.info("Keystore not found. Creating a new keystore...");
+            initializeKeyStore();  // This already saves the keystore
         }
+
+        try (FileInputStream fis = new FileInputStream(keystoreFile)) {
+            keyStore.load(fis, keyStorePassword.toCharArray());
+        }
+
         return keyStore;
     }
 

@@ -27,4 +27,4 @@ replay_pid*
 .mvn/
 *.iml
 out/
-target/classes/application.properties
+/target
