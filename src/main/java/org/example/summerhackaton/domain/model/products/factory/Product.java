@@ -3,41 +3,36 @@ package org.example.summerhackaton.domain.model.products.factory;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.math.BigDecimal;
+import java.util.Objects;
+
 @Document(collection = "products")
 public abstract class Product {
     @Id
     private String id;
     private String name;
     private ProductType type;
-    private String price;
+    private BigDecimal price;
     private int quantity;
 
-    protected Product () {
-        super();
+    public Product() {
     }
 
+    public Product(String id, String name, ProductType type, BigDecimal price, int quantity) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    // Getters y setters
     public String getId() {
         return id;
     }
 
-    protected void setId(String id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
     }
 
     public String getName() {
@@ -54,5 +49,51 @@ public abstract class Product {
 
     public void setType(ProductType type) {
         this.type = type;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    // equals y hashCode
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return quantity == product.quantity &&
+                Objects.equals(id, product.id) &&
+                Objects.equals(name, product.name) &&
+                type == product.type &&
+                Objects.equals(price, product.price);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, type, price, quantity);
+    }
+
+    // toString
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", type=" + type +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                '}';
     }
 }
