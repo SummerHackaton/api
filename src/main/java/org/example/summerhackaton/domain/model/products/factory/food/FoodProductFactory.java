@@ -4,6 +4,7 @@ import org.example.summerhackaton.domain.model.products.factory.Product;
 import org.example.summerhackaton.domain.model.products.factory.ProductFactory;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.Map;
 
 @Component
@@ -13,7 +14,7 @@ public class FoodProductFactory implements ProductFactory {
         FoodProduct food = new FoodProduct();
         food.setName((String) attributes.get("name"));
         food.setType("food");
-        food.setExpirationDate((String) attributes.get("expirationDate"));
+        food.setExpirationDate((LocalDate) attributes.get("expirationDate"));
         food.setPerishable(Boolean.parseBoolean(attributes.get("isPerishable").toString()));
         return food;
     }
