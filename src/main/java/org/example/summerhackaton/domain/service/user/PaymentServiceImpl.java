@@ -5,9 +5,11 @@ import org.example.summerhackaton.domain.model.exceptions.BadRequestException;
 import org.example.summerhackaton.domain.model.products.factory.Product;
 import org.example.summerhackaton.domain.model.user.QRCode;
 import org.example.summerhackaton.domain.model.user.UserEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class PaymentServiceImpl implements PaymentService{
     private final UserRepository userRepository;
 

@@ -1,9 +1,12 @@
 package org.example.summerhackaton.domain.service.user;
 
 import org.example.summerhackaton.dao.UserRepository;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
+
+@Service
 public class BalanceServiceImpl implements BalanceService{
     private final UserRepository userRepository;
 
