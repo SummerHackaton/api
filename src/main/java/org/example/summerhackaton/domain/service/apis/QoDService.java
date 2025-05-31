@@ -15,15 +15,11 @@ import java.util.List;
 public class QoDService {
 
     private final RestTemplate restTemplate;
-    private final String baseUrl;
-    private final String apiKey;
+    private String baseUrl = "";
+    private String apiKey = "";
 
-    public QoDService(RestTemplate restTemplate,
-                      @Value("${qod.api.base-url:https://opengateway.telefonica.com}") String baseUrl,
-                      @Value("${qod.api.key}") String apiKey) {
+    public QoDService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
-        this.baseUrl = baseUrl;
-        this.apiKey = apiKey;
     }
 
     /**
