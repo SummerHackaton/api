@@ -1,6 +1,7 @@
 package org.example.summerhackaton.ui.festival;
 
 import org.example.summerhackaton.domain.model.festival.Festival;
+import org.example.summerhackaton.domain.model.festival.SimpleLocation;
 import org.example.summerhackaton.domain.service.festival.FestivalService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,12 @@ public class FestivalController {
         return festivalService.getFestivalById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+
+    @GetMapping("/findByLocation")
+    public ResponseEntity<Festival> getFestivalByLocation(@RequestBody SimpleLocation simpleLocation) {
+        return ResponseEntity.ok(festivalService.getFestivalByLocation(simpleLocation));
     }
 }
 

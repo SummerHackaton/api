@@ -8,7 +8,9 @@ public abstract class Product {
     @Id
     private String id;
     private String name;
-    private String type;
+    private ProductType type;
+    private String price;
+    private int quantity;
 
     protected Product () {
         super();
@@ -22,6 +24,22 @@ public abstract class Product {
         this.id = id;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
     public String getName() {
         return name;
     }
@@ -30,11 +48,11 @@ public abstract class Product {
         this.name = name;
     }
 
-    public String getType() {
+    public ProductType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(ProductType type) {
         this.type = type;
     }
 }
