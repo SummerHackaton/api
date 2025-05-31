@@ -2,6 +2,7 @@ package org.example.summerhackaton.domain.model.festival;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.example.summerhackaton.domain.model.festival.shop.Shop;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,9 +17,10 @@ public class Festival {
     @Id
     private String id;
     private String name;
-    private String location;
+    private LocationRange location;
     private LocalDate startDate;
     private LocalDate endDate;
+    private List<Shop> stores;
     private List<ShopFestivalParticipation> participations;
 
     public Festival () {
