@@ -3,6 +3,7 @@ package org.example.summerhackaton.ui.user;
 import org.example.summerhackaton.domain.service.user.BalanceService;
 import org.example.summerhackaton.domain.service.user.BalanceServiceImpl;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +25,7 @@ public class BalanceController {
 
     // Add Balance
     @PostMapping("/add/{balanceAmount}/{userId}")
-    public ResponseEntity<String> addBalance(BigDecimal balanceAmount, String userId) {
+    public ResponseEntity<String> addBalance(@PathVariable BigDecimal balanceAmount, @PathVariable String userId) {
         balanceServiceImpl.addBalance(balanceAmount, userId);
         return ResponseEntity.ok("Balance added successfully for user: " + userId + " with amount: " + balanceAmount);
     }

@@ -1,58 +1,23 @@
 package org.example.summerhackaton.domain.model.products.factory;
 
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.math.BigDecimal;
+
 @Document(collection = "products")
+@Data
+@Builder
+@NoArgsConstructor
 public abstract class Product {
     @Id
     private String id;
     private String name;
     private ProductType type;
-    private String price;
+    private BigDecimal price;
     private int quantity;
 
-    protected Product () {
-        super();
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    protected void setId(String id) {
-        this.id = id;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public ProductType getType() {
-        return type;
-    }
-
-    public void setType(ProductType type) {
-        this.type = type;
-    }
 }
