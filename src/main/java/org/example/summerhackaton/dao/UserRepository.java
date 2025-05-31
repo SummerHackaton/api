@@ -1,7 +1,7 @@
 package org.example.summerhackaton.dao;
 
 
-import org.example.summerhackaton.domain.model.UserEntity;
+import org.example.summerhackaton.domain.model.user.UserEntity;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -1,4 +1,4 @@
-package org.example.summerhackaton.domain.model;
+package org.example.summerhackaton.domain.model.user;
 import jakarta.persistence.*;
 import lombok.*;
 

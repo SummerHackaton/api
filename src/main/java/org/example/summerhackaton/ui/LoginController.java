@@ -2,8 +2,8 @@ package org.example.summerhackaton.ui;
 
 
 import org.example.summerhackaton.common.Constantes;
-import org.example.summerhackaton.domain.model.LoginResponse;
-import org.example.summerhackaton.domain.service.ServicioLogin;
+import org.example.summerhackaton.domain.model.Token;
+import org.example.summerhackaton.domain.service.authentication.ServicioLogin;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,9 +16,9 @@ public class LoginController {
     }
 
     @PostMapping( Constantes.PATH_LOGIN)
-    public ResponseEntity<LoginResponse> login(@RequestParam String username,
-                                               @RequestParam String password) {
-        LoginResponse tokens = servicioLogin.login(username, password);
+    public ResponseEntity<Token> login(@RequestParam String username,
+                                       @RequestParam String password) {
+        Token tokens = servicioLogin.login(username, password);
         return tokens == null
                 ? ResponseEntity.status(401).body(null)
                 : ResponseEntity.ok(tokens);

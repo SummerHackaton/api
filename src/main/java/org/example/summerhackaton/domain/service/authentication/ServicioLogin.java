@@ -1,11 +1,11 @@
-package org.example.summerhackaton.domain.service;
+package org.example.summerhackaton.domain.service.authentication;
 
 import org.example.summerhackaton.common.PasswordHash;
 import org.example.summerhackaton.dao.RolesRepository;
 import org.example.summerhackaton.dao.UserRepository;
-import org.example.summerhackaton.domain.model.LoginResponse;
-import org.example.summerhackaton.domain.model.RolesEntity;
-import org.example.summerhackaton.domain.model.UserEntity;
+import org.example.summerhackaton.domain.model.Token;
+import org.example.summerhackaton.domain.model.user.RolesEntity;
+import org.example.summerhackaton.domain.model.user.UserEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +35,7 @@ public class ServicioLogin {
         this.rolesRepository = rolesRepository;
     }
 
-    public LoginResponse login(String user, String pass) {
+    public Token login(String user, String pass) {
         boolean isAuthenticated = userRepository.findByUsername(user)
                 .map(c -> {
                             try {
@@ -50,7 +50,7 @@ public class ServicioLogin {
         if (isAuthenticated) {
             String token = jwtService.generateToken(userDetailsService.loadUserByUsername(user));
             String refreshToken = jwtService.generateRefreshToken(userDetailsService.loadUserByUsername(user));
-            return new LoginResponse(
+            return new Token(
                     token,
                     refreshToken
             );

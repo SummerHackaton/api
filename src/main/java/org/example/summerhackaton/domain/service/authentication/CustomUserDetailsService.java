@@ -1,10 +1,10 @@
-package org.example.summerhackaton.domain.service;
+package org.example.summerhackaton.domain.service.authentication;
 
 
 
 import org.example.summerhackaton.dao.UserRepository;
-import org.example.summerhackaton.domain.model.RolesEntity;
-import org.example.summerhackaton.domain.model.UserEntity;
+import org.example.summerhackaton.domain.model.user.RolesEntity;
+import org.example.summerhackaton.domain.model.user.UserEntity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

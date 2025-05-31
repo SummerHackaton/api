@@ -3,8 +3,8 @@ package org.example.summerhackaton.ui;
 import lombok.RequiredArgsConstructor;
 
 import org.example.summerhackaton.common.Constantes;
-import org.example.summerhackaton.domain.model.LoginResponse;
-import org.example.summerhackaton.domain.service.JwtService;
+import org.example.summerhackaton.domain.model.Token;
+import org.example.summerhackaton.domain.service.authentication.JwtService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,15 +21,15 @@ public class AuthController {
     private final UserDetailsService userDetailsService;
 
     @PostMapping
-    public ResponseEntity<LoginResponse> refreshToken(@RequestParam("refreshToken") String refreshToken) {
+    public ResponseEntity<Token> refreshToken(@RequestParam("refreshToken") String refreshToken) {
         String username = jwtService.extractUsername(refreshToken);
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
         if (jwtService.isTokenValid(refreshToken, userDetails)) {
             String newToken = jwtService.generateToken(userDetails);
             String newRefreshToken = jwtService.generateRefreshToken(userDetails);
-            LoginResponse loginResponse = new LoginResponse(newToken, newRefreshToken);
-            return ResponseEntity.ok(loginResponse);
+            Token token = new Token(newToken, newRefreshToken);
+            return ResponseEntity.ok(token);
         } else {
             return ResponseEntity.status(403).body(null);
         }

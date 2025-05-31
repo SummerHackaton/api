@@ -8,7 +8,7 @@ import lombok.*;
 @Builder
 @ToString
 @AllArgsConstructor
-public class LoginResponse {
-    private final String token;
-    private final String refreshToken;
+public class Token {
+    private final String access;
+    private final String refresh;
 }
