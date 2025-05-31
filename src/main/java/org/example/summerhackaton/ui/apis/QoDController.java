@@ -6,8 +6,6 @@ import org.example.summerhackaton.domain.model.apisModel.QoDSessionResponse;
 import org.example.summerhackaton.domain.service.apis.QoDService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.example.summerhackaton.domain.service.apis.QoDService.QoDSessionRequest;
-import org.example.summerhackaton.domain.service.apis.QoDService.QoDSessionResponse;
 
 import java.util.List;
 

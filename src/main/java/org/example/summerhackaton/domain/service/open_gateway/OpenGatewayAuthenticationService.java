@@ -2,7 +2,7 @@ package org.example.summerhackaton.domain.service.open_gateway;
 
 import lombok.RequiredArgsConstructor;
 import org.example.summerhackaton.domain.model.open_gateway_authentication.CIBAAuthorizationResponse;
-import org.example.summerhackaton.domain.model.open_gateway_authentication.OpenGatewayToken;
+import org.example.summerhackaton.domain.model.security.OpenGatewayToken;
 import org.example.summerhackaton.domain.service.security.KeyStoreService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -37,6 +37,21 @@ public class OpenGatewayAuthenticationService {
 
     private static final String AUTH_URL = "https://sandbox.opengateway.telefonica.com/apigateway/bc-authorize";
     private static final String TOKEN_URL = "https://sandbox.opengateway.telefonica.com/apigateway/token";
+
+
+    public OpenGatewayToken getAccessToken() {
+        // Step 1: Get auth_req_id
+        CIBAAuthorizationResponse authResponse = getAuthReqId();
+
+        // Step 2: Exchange auth_req_id for access token
+        OpenGatewayToken openGatewayToken = getToken(authResponse.getAuthReqId());
+        keyStoreService.saveToken(openGatewayToken.getAccessToken(),"api_token",tokenPassword.toCharArray());
+        System.out.println("actual -> " + openGatewayToken.getAccessToken() + ", " +
+                "saved in keystore -> " + keyStoreService.getToken("api_token",tokenPassword.toCharArray()));
+        System.out.println(openGatewayToken.getAccessToken().equals(keyStoreService.getToken("api_token",tokenPassword.toCharArray())));
+        return openGatewayToken;
+    }
+
 
 
     public OpenGatewayToken getToken() {
