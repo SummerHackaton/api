@@ -35,10 +35,19 @@ public class PaymentServiceImpl implements PaymentService{
 
     @Override
     public void payForProducts(List<Product> products, String userId) {
-        // Find the user by userId
         UserEntity user = userRepository.findById(userId)
                 .orElseThrow(() -> new BadRequestException("User not found"));
 
+        // Sumar los precios usando BigDecimal
+        java.math.BigDecimal totalCost = products.stream()
+                .map(product -> product.getPrice())
+                .reduce(java.math.BigDecimal.ZERO, java.math.BigDecimal::add);
 
+        if (user.getBalance().compareTo(totalCost) < 0) {
+            throw new BadRequestException("Insufficient balance");
+        }
+        user.setBalance(user.getBalance().subtract(totalCost));
+        user.getBoughtProducts().addAll(products);
+        userRepository.save(user);
     }
 }
