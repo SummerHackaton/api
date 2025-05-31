@@ -14,7 +14,7 @@ public class FoodProductFactory implements ProductFactory {
         FoodProduct food = new FoodProduct();
         food.setName((String) attributes.get("name"));
         food.setType("food");
-        food.setExpirationDate((LocalDate) attributes.get("expirationDate"));
+        food.setExpirationDate(LocalDate.parse((String)attributes.get("expirationDate")));
         food.setPerishable(Boolean.parseBoolean(attributes.get("isPerishable").toString()));
         return food;
     }
