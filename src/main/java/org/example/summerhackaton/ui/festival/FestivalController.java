@@ -35,16 +35,5 @@ public class FestivalController {
     public ResponseEntity<Festival> getFestivalByLocation(@RequestBody SimpleLocation simpleLocation) {
         return ResponseEntity.ok(festivalService.getFestivalByLocation(simpleLocation));
     }
-
-
-
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Festival> getAllFestivals() {
-        return null;
-    }
-
-
-
 }
 
