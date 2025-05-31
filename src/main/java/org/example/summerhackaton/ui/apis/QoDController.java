@@ -1,9 +1,9 @@
 package org.example.summerhackaton.ui.apis;
 
 
+import org.example.summerhackaton.domain.model.apisModel.QoDSessionRequest;
+import org.example.summerhackaton.domain.model.apisModel.QoDSessionResponse;
 import org.example.summerhackaton.domain.service.apis.QoDService;
-import org.example.summerhackaton.domain.service.apis.QoDService.QoDSessionRequest;
-import org.example.summerhackaton.domain.service.apis.QoDService.QoDSessionResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +28,7 @@ public class QoDController {
 
     @GetMapping("/sessions/{sessionId}")
     public ResponseEntity<QoDSessionResponse> getSession(@PathVariable String sessionId) {
-        QoDService.QoDSessionResponse response = qodService.getSession(sessionId);
+        QoDSessionResponse response = qodService.getSession(sessionId);
         return ResponseEntity.ok(response);
     }
 
@@ -39,7 +39,7 @@ public class QoDController {
     }
 
     @GetMapping("/sessions")
-    public ResponseEntity<List<QoDService.QoDSessionResponse>> listSessions() {
+    public ResponseEntity<List<QoDSessionResponse>> listSessions() {
         List<QoDSessionResponse> sessions = qodService.listSessions();
         return ResponseEntity.ok(sessions);
     }

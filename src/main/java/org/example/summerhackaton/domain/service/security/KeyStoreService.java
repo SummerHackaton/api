@@ -74,11 +74,10 @@ public class KeyStoreService {
         KeyStore keyStore = KeyStore.getInstance(keyStoreType);
         File keystoreFile = new File(keyStorePath);
 
-        if (!keystoreFile.exists()) {
-            logger.info("Initializing new keystore...");
+        if (!keystoreFile.exists() || keystoreFile.length() == 0) {
+            logger.info("Inicializando nuevo keystore...");
             initializeKeyStore();
             keyStore.load(null, keyStorePassword.toCharArray());
-            // Auto-save
             try (FileOutputStream fos = new FileOutputStream(keystoreFile)) {
                 keyStore.store(fos, keyStorePassword.toCharArray());
             }
