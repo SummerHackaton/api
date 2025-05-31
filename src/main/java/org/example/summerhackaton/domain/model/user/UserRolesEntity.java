@@ -1,27 +1,21 @@
 package org.example.summerhackaton.domain.model.user;
 
-import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+@Document(collection = "user_roles")
 @Getter
 @Setter
 @Builder
 @ToString
 @NoArgsConstructor
-@Table(name = "user_roles")
 @AllArgsConstructor
 public class UserRolesEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Integer id;
+    private String id;
 
-    @ManyToOne
-    @JoinColumn(name = "rol", nullable = false)
     private RolesEntity rol;
 
-    @ManyToOne
-    @JoinColumn(name = "user", nullable = false)
     private UserEntity user;
 }

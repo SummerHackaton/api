@@ -76,17 +76,9 @@ public class ServicioLogin {
         return false;
     }
 
-    public void activate(String codigo) {
-        UserEntity user = userRepository.findByCodigo(codigo);
-        user.setEnabled(true);
-        userRepository.save(user);
-    }
 
     public UserEntity getUserByUsername(String username) {
         return userRepository.findByUsername(username).orElse(null);
     }
 
-    public RolesEntity getRolById(Long id){
-        return rolesRepository.getRolesEntitiesById(id);
-    }
 }
