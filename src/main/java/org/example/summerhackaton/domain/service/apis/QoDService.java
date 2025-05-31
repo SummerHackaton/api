@@ -7,8 +7,6 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-
-import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -17,6 +15,7 @@ public class QoDService {
     private final RestTemplate restTemplate;
     private final String baseUrl;
     private final String apiKey;
+
 
     public QoDService(RestTemplate restTemplate,
                       @Value("${qod.api.base-url:https://opengateway.telefonica.com}") String baseUrl,
@@ -45,8 +44,8 @@ public class QoDService {
 
             return response.getBody();
         } catch (HttpClientErrorException e) {
-            throw new QoDException("Error creating QoD session: " + e.getMessage(), e);
-        }
+            String responseBody = e.getResponseBodyAsString();
+            throw new QoDException("Error QoD: " + e.getStatusCode() + " - " + responseBody, e);        }
     }
 
     /**
@@ -68,7 +67,8 @@ public class QoDService {
 
             return response.getBody();
         } catch (HttpClientErrorException e) {
-            throw new QoDException("Error getting QoD session: " + e.getMessage(), e);
+            String responseBody = e.getResponseBodyAsString();
+            throw new QoDException("Error QoD: " + e.getStatusCode() + " - " + responseBody, e);
         }
     }
 
@@ -88,7 +88,8 @@ public class QoDService {
                     Void.class
             );
         } catch (HttpClientErrorException e) {
-            throw new QoDException("Error deleting QoD session: " + e.getMessage(), e);
+            String responseBody = e.getResponseBodyAsString();
+            throw new QoDException("Error QoD: " + e.getStatusCode() + " - " + responseBody, e);
         }
     }
 
@@ -110,7 +111,8 @@ public class QoDService {
 
             return response.getBody().getSessions();
         } catch (HttpClientErrorException e) {
-            throw new QoDException("Error listing QoD sessions: " + e.getMessage(), e);
+            String responseBody = e.getResponseBodyAsString();
+            throw new QoDException("Error QoD: " + e.getStatusCode() + " - " + responseBody, e);
         }
     }
 
@@ -122,79 +124,123 @@ public class QoDService {
     }
 
     // DTOs para las requests y responses
-
     public static class QoDSessionRequest {
-        private Device device;
-        private ApplicationServer applicationServer;
-        private QosProfile qosProfile;
-        private String webhook;
-        private Instant expiresAt;
+        @JsonProperty("externalSessionId")
+        private String externalSessionId;
 
-        // Constructors, getters y setters
-        public QoDSessionRequest() {}
+        @JsonProperty("ueId")
+        private UeId ueId;
 
-        public QoDSessionRequest(Device device, ApplicationServer applicationServer,
-                                 QosProfile qosProfile, String webhook, Instant expiresAt) {
-            this.device = device;
-            this.applicationServer = applicationServer;
-            this.qosProfile = qosProfile;
-            this.webhook = webhook;
-            this.expiresAt = expiresAt;
+        @JsonProperty("qosProfile")
+        private String qosProfile;  // String con nombre de perfil
+
+        @JsonProperty("notificationUrl")
+        private String notificationUrl;
+
+        @JsonProperty("duration")
+        private Integer duration;   // Duración en segundos
+
+        @JsonProperty("asId")
+        private String asId;
+
+        // Getters y setters
+
+        public String getExternalSessionId() {
+            return externalSessionId;
         }
 
-        // Getters y setters
-        public Device getDevice() { return device; }
-        public void setDevice(Device device) { this.device = device; }
+        public void setExternalSessionId(String externalSessionId) {
+            this.externalSessionId = externalSessionId;
+        }
 
-        public ApplicationServer getApplicationServer() { return applicationServer; }
-        public void setApplicationServer(ApplicationServer applicationServer) { this.applicationServer = applicationServer; }
+        public String getQosProfile() {
+            return qosProfile;
+        }
 
-        public QosProfile getQosProfile() { return qosProfile; }
-        public void setQosProfile(QosProfile qosProfile) { this.qosProfile = qosProfile; }
+        public void setQosProfile(String qosProfile) {
+            this.qosProfile = qosProfile;
+        }
 
-        public String getWebhook() { return webhook; }
-        public void setWebhook(String webhook) { this.webhook = webhook; }
+        public UeId getUeId() {
+            return ueId;
+        }
 
-        public Instant getExpiresAt() { return expiresAt; }
-        public void setExpiresAt(Instant expiresAt) { this.expiresAt = expiresAt; }
+        public void setUeId(UeId ueId) {
+            this.ueId = ueId;
+        }
+
+        public String getNotificationUrl() {
+            return notificationUrl;
+        }
+
+        public void setNotificationUrl(String notificationUrl) {
+            this.notificationUrl = notificationUrl;
+        }
+
+        public Integer getDuration() {
+            return duration;
+        }
+
+        public void setDuration(Integer duration) {
+            this.duration = duration;
+        }
+
+        public String getAsId() {
+            return asId;
+        }
+
+        public void setAsId(String asId) {
+            this.asId = asId;
+        }
     }
 
+    public static class UeId {
+        @JsonProperty("msisdn")
+        private String msisdn;       // Formato: +34666555432
+
+        @JsonProperty("ipAddress")
+        private String ipAddress;    // IPv4 o IPv6
+
+        // Getters y setters
+    }
+
+    // RESPONSE CORREGIDO
     public static class QoDSessionResponse {
-        private String id;
-        private Device device;
-        private ApplicationServer applicationServer;
-        private QosProfile qosProfile;
-        private String webhook;
-        private Instant expiresAt;
-        private Instant startedAt;
-        private String status;
+        @JsonProperty("sessionId")
+        private String sessionId;
+
+        @JsonProperty("qosProfile")
+        private String qosProfile;
+
+        @JsonProperty("expiresAt")
+        private String expiresAt;    // Fecha ISO 8601
 
         // Getters y setters
-        public String getId() { return id; }
-        public void setId(String id) { this.id = id; }
 
-        public Device getDevice() { return device; }
-        public void setDevice(Device device) { this.device = device; }
+        public String getSessionId() {
+            return sessionId;
+        }
 
-        public ApplicationServer getApplicationServer() { return applicationServer; }
-        public void setApplicationServer(ApplicationServer applicationServer) { this.applicationServer = applicationServer; }
+        public void setSessionId(String sessionId) {
+            this.sessionId = sessionId;
+        }
 
-        public QosProfile getQosProfile() { return qosProfile; }
-        public void setQosProfile(QosProfile qosProfile) { this.qosProfile = qosProfile; }
+        public String getQosProfile() {
+            return qosProfile;
+        }
 
-        public String getWebhook() { return webhook; }
-        public void setWebhook(String webhook) { this.webhook = webhook; }
+        public void setQosProfile(String qosProfile) {
+            this.qosProfile = qosProfile;
+        }
 
-        public Instant getExpiresAt() { return expiresAt; }
-        public void setExpiresAt(Instant expiresAt) { this.expiresAt = expiresAt; }
+        public String getExpiresAt() {
+            return expiresAt;
+        }
 
-        public Instant getStartedAt() { return startedAt; }
-        public void setStartedAt(Instant startedAt) { this.startedAt = startedAt; }
-
-        public String getStatus() { return status; }
-        public void setStatus(String status) { this.status = status; }
+        public void setExpiresAt(String expiresAt) {
+            this.expiresAt = expiresAt;
+        }
     }
-
     public static class QoDSessionListResponse {
         private List<QoDSessionResponse> sessions;
 

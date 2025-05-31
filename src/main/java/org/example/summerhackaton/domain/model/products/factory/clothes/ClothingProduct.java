@@ -1,6 +1,5 @@
 package org.example.summerhackaton.domain.model.products.factory.clothes;
 
-import lombok.Data;
 import org.example.summerhackaton.domain.model.products.factory.Product;
 
 public class ClothingProduct extends Product {
