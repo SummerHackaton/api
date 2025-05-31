@@ -27,4 +27,3 @@ public class ProductService {
         return mongoTemplate.save(product);
     }
 }
-
