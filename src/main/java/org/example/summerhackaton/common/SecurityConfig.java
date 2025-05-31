@@ -18,10 +18,14 @@ import org.springframework.web.filter.HiddenHttpMethodFilter;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-@RequiredArgsConstructor
 public class SecurityConfig {
     private final AuthenticationProvider authenticationProvider;
     private final TokenFilter jwtAuthFilter;
+
+    public SecurityConfig(AuthenticationProvider authenticationProvider, TokenFilter jwtAuthFilter) {
+        this.authenticationProvider = authenticationProvider;
+        this.jwtAuthFilter = jwtAuthFilter;
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

@@ -7,8 +7,12 @@ import lombok.*;
 @Setter
 @Builder
 @ToString
-@AllArgsConstructor
 public class Token {
     private final String access;
     private final String refresh;
+
+    public Token(String access, String refresh) {
+        this.access = access;
+        this.refresh = refresh;
+    }
 }
