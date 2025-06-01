@@ -8,6 +8,6 @@ import java.math.BigDecimal;
 @Data
 @Builder
 public class SimpleLocation {
-    private BigDecimal x;
-    private BigDecimal y;
+    private Double x;
+    private Double y;
 }

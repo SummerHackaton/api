@@ -1,5 +1,6 @@
 package org.example.summerhackaton.common;
 
+import lombok.RequiredArgsConstructor;
 import org.example.summerhackaton.filters.TokenFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,7 +34,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(req ->
                         req.
                                 requestMatchers(Constantes.BASE_URL+Constantes.PATH_LOGIN).permitAll()
-                                .requestMatchers(Constantes.BASE_URL+Constantes.PATH_REGISTER).permitAll()
+                                .requestMatchers(Constantes.BASE_URL+Constantes.PATH_REGISTER).permitAll().
+                                requestMatchers(Constantes.PATH_LOGIN).permitAll()
+                                .requestMatchers(Constantes.PATH_REGISTER).permitAll()
+                                .requestMatchers("/api/1.0/festival/findByLocation").permitAll()
                                 .anyRequest()
                                 .authenticated()
                 )

@@ -3,6 +3,7 @@ package org.example.summerhackaton.ui;
 
 import org.example.summerhackaton.common.Constantes;
 import org.example.summerhackaton.domain.model.Token;
+import org.example.summerhackaton.domain.model.requests.LoginRequest;
 import org.example.summerhackaton.domain.model.user.RolesEntity;
 import org.example.summerhackaton.domain.model.user.UserEntity;
 import org.example.summerhackaton.domain.service.authentication.ServicioLogin;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/api/1.0")
+@CrossOrigin(origins = "*")
 public class LoginController {
     private final ServicioLogin servicioLogin;
 
@@ -21,9 +22,8 @@ public class LoginController {
     }
 
     @PostMapping( Constantes.PATH_LOGIN)
-    public ResponseEntity<Token> login(@RequestParam String username,
-                                       @RequestParam String password) {
-        Token tokens = servicioLogin.login(username, password);
+    public ResponseEntity<Token> login(@RequestBody LoginRequest loginRequest) {
+        Token tokens = servicioLogin.login(loginRequest.getUsername(), loginRequest.getPassword());
         return tokens == null
                 ? ResponseEntity.status(401).body(null)
                 : ResponseEntity.ok(tokens);
@@ -35,6 +35,7 @@ public class LoginController {
         final var userEntity = new UserEntity();
         userEntity.setUsername(username);
         userEntity.setPassword(password);
+        userEntity.setEnabled(true);
         userEntity.setRoles(Set.of(new RolesEntity(userEntity.getId(), "USER")));
         return
                 servicioLogin.save(userEntity)

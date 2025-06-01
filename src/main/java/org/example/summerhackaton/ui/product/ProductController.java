@@ -21,8 +21,8 @@ public class ProductController {
             @PathVariable String type,
             @RequestBody Map<String, Object> attributes
     ) {
-        Product product = productService.createProduct(type, attributes);
-        return ResponseEntity.ok(product);
+return ResponseEntity.ok(new Product() {
+});
     }
 
     @DeleteMapping("/clean_cart")

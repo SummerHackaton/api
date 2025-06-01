@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 @Document(collection = "products")
-public abstract class Product {
+public class Product {
     @Id
     private String id;
     private String name;
