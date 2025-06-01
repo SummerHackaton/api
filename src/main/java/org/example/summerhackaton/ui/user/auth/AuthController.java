@@ -1,9 +1,9 @@
-package org.example.summerhackaton.ui;
+package org.example.summerhackaton.ui.user.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.example.summerhackaton.common.Constantes;
 import org.example.summerhackaton.domain.model.Token;
-import org.example.summerhackaton.domain.service.authentication.JwtService;
+import org.example.summerhackaton.domain.service.authentication.local.JwtService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

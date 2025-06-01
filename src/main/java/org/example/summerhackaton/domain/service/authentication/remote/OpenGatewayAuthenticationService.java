@@ -1,4 +1,4 @@
-package org.example.summerhackaton.domain.service.open_gateway;
+package org.example.summerhackaton.domain.service.authentication.remote;
 
 import lombok.RequiredArgsConstructor;
 import org.example.summerhackaton.domain.model.open_gateway_authentication.CIBAAuthorizationResponse;

@@ -3,7 +3,7 @@ package org.example.summerhackaton.domain.service.apis;
 import lombok.RequiredArgsConstructor;
 import org.example.summerhackaton.domain.model.device_location_api.petition.DeviceLocationPetition;
 import org.example.summerhackaton.domain.model.device_location_api.response.DeviceLocationResponse;
-import org.example.summerhackaton.domain.service.open_gateway.OpenGatewayAuthenticationService;
+import org.example.summerhackaton.domain.service.authentication.remote.OpenGatewayAuthenticationService;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;

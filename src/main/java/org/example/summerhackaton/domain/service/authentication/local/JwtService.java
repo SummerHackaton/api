@@ -1,4 +1,4 @@
-package org.example.summerhackaton.domain.service.authentication;
+package org.example.summerhackaton.domain.service.authentication.local;
 
 import com.google.gson.internal.LinkedTreeMap;
 import io.jsonwebtoken.Claims;

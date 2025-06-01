@@ -1,4 +1,4 @@
-package org.example.summerhackaton.ui;
+package org.example.summerhackaton.ui.user.auth;
 
 
 import org.example.summerhackaton.common.Constantes;
@@ -6,7 +6,7 @@ import org.example.summerhackaton.domain.model.Token;
 import org.example.summerhackaton.domain.model.requests.LoginRequest;
 import org.example.summerhackaton.domain.model.user.RolesEntity;
 import org.example.summerhackaton.domain.model.user.UserEntity;
-import org.example.summerhackaton.domain.service.authentication.ServicioLogin;
+import org.example.summerhackaton.domain.service.authentication.local.ServicioLogin;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
