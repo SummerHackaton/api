@@ -1,6 +1,11 @@
 ###
-POST http://localhost:8080/api/1.0/login?username=b&password=b
+POST http://localhost:8080/api/1.0/login
 Content-Type: application/json
+
+{
+  "username": "b",
+  "password": "b"
+}
 
 > {%
  client.global.set("token",response.body.access)
@@ -13,10 +18,9 @@ Content-Type: application/json
 
 {
   "ueid": {
-    "msisdn": "+34649379033",
-    "ipv4Addr": "192.168.0.0"
+    "msisdn": "+34649379033"
   },
-  "latitude": 40.4525075099974,
-  "longitude": -3.7972401929128146,
+  "latitude": 40.41682,
+  "longitude": -3.68473,
   "accuracy": 2
 }

@@ -42,10 +42,10 @@ public class OpenGatewayAuthenticationService {
 
         // Step 2: Exchange auth_req_id for access token
         OpenGatewayToken openGatewayToken = getToken(authResponse.getAuthReqId());
-        keyStoreService.saveToken(openGatewayToken.getAccessToken(),"api_token",tokenPassword.toCharArray());
+        keyStoreService.saveToken(openGatewayToken.getAccessToken(),scope,tokenPassword.toCharArray());
         System.out.println("actual -> " + openGatewayToken.getAccessToken() + ", " +
-                "saved in keystore -> " + keyStoreService.getToken("api_token",tokenPassword.toCharArray()));
-        System.out.println(openGatewayToken.getAccessToken().equals(keyStoreService.getToken("api_token",tokenPassword.toCharArray())));
+                "saved in keystore -> " + keyStoreService.getToken(scope,tokenPassword.toCharArray()));
+        System.out.println(openGatewayToken.getAccessToken().equals(keyStoreService.getToken(scope,tokenPassword.toCharArray())));
         return openGatewayToken;
     }
 
