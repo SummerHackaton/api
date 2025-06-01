@@ -22,7 +22,7 @@ public class AutomatorController {
         this.automatorService = automatorService;
     }
 
-    @GetMapping("/canjeador-demo")
+    @GetMapping("/canjeador-demo/{bulkCart}")
     public ResponseEntity<Boolean> canjeadorDemo(@PathVariable String bulkCart) {
         List<Product> cart = automatorService.parseCart(bulkCart);
         return ResponseEntity.ok(automatorService.canjeadorDemo(cart));
