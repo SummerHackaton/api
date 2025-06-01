@@ -1,7 +1,5 @@
 package org.example.summerhackaton.domain.model.apisModel;
 
-import lombok.Data;
-
 public  class IPv4Address {
     private String publicAddress;
     private String privateAddress;

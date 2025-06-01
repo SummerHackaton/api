@@ -1,7 +1,5 @@
 package org.example.summerhackaton.domain.model.apisModel;
 
-import lombok.Data;
-
 public class ApplicationServer {
         private String ipv4Address; // Formato: "1.2.3.4" o "1.2.3.4/24"
         private String ipv6Address; // Opcional

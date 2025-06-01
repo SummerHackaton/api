@@ -1,7 +1,5 @@
 package org.example.summerhackaton.domain.model.apisModel;
 
-import org.example.summerhackaton.domain.service.apis.QoDService;
-
 import java.util.List;
 
 public class DevicePorts {

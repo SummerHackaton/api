@@ -1,7 +1,6 @@
 package org.example.summerhackaton.domain.model.products.factory.food;
 
 import org.example.summerhackaton.domain.model.products.factory.Product;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 
