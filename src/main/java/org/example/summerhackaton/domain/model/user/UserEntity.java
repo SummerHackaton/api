@@ -24,8 +24,6 @@ public class UserEntity {
     private boolean enabled;
     private String codigo;
     private Set<RolesEntity> roles;
-
-
     private List<Product> boughtProducts;
     private BigDecimal balance;
 

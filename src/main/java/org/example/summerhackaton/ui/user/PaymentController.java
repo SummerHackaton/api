@@ -3,7 +3,6 @@ package org.example.summerhackaton.ui.user;
 
 import org.example.summerhackaton.domain.model.products.factory.Product;
 import org.example.summerhackaton.domain.model.user.QRCode;
-import org.example.summerhackaton.domain.service.user.PaymentService;
 import org.example.summerhackaton.domain.service.user.PaymentServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

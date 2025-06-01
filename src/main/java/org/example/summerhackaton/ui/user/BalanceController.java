@@ -1,6 +1,5 @@
 package org.example.summerhackaton.ui.user;
 
-import org.example.summerhackaton.domain.service.user.BalanceService;
 import org.example.summerhackaton.domain.service.user.BalanceServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;

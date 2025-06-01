@@ -1,7 +1,7 @@
 package org.example.summerhackaton.common;
 
 import org.example.summerhackaton.dao.UserRepository;
-import org.example.summerhackaton.domain.service.authentication.CustomUserDetailsService;
+import org.example.summerhackaton.domain.service.authentication.local.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
