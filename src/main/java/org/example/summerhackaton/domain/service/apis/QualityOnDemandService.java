@@ -3,7 +3,7 @@ package org.example.summerhackaton.domain.service.apis;
 import lombok.AllArgsConstructor;
 import org.example.summerhackaton.domain.model.quality_on_demand_api.QualityOnDemandResponse;
 import org.example.summerhackaton.domain.model.quality_on_demand_api.QualityOnDemandSessionRequest;
-import org.example.summerhackaton.domain.service.open_gateway.OpenGatewayAuthenticationService;
+import org.example.summerhackaton.domain.service.authentication.remote.OpenGatewayAuthenticationService;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

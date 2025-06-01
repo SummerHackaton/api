@@ -8,10 +8,7 @@ import org.example.summerhackaton.domain.model.user.RolesEntity;
 import org.example.summerhackaton.domain.model.user.UserEntity;
 import org.example.summerhackaton.domain.service.authentication.local.ServicioLogin;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
