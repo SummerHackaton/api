@@ -11,7 +11,8 @@ Content-Type: application/json
  client.global.set("token",response.body.access)
 %}
 
-###
+### 40.51559498031505, -3.6621088484636917 buenas
+### 40.41682, -3.68473 malas
 POST http://localhost:8080/api/1.0/verify_location
 Authorization: Bearer {{token}}
 Content-Type: application/json

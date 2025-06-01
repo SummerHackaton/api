@@ -1,11 +1,14 @@
 package org.example.summerhackaton.domain.service.automator;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.summerhackaton.domain.model.products.factory.Product;
 import org.example.summerhackaton.domain.model.user.QRCode;
 import org.example.summerhackaton.ui.user.PaymentController;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.Base64;
 import java.util.List;
 import java.util.Random;
 
@@ -36,5 +39,18 @@ public class AutomatorServiceImpl implements AutomatorService{
             Thread.currentThread().interrupt(); // Restore interrupted status
         }
         return false;
+    }
+
+    @Override
+    public List<Product> parseCart(String bulkCart) {
+        //esta la lista en base 64, viene del frontend
+        try {
+            byte[] decodedBytes = Base64.getDecoder().decode(bulkCart);
+            String json = new String(decodedBytes);
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.readValue(json, new TypeReference<List<Product>>() {});
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Error al parsear el carrito", e);
+        }
     }
 }

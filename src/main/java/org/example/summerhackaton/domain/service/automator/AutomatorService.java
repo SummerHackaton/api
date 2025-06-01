@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface AutomatorService {
     Boolean canjeadorDemo(List<Product> cart);
+
+    List<Product> parseCart(String bulkCart);
 }
