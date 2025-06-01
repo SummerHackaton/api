@@ -20,7 +20,7 @@ public class PaymentController {
         this.paymentServiceImpl = paymentServiceImpl;
     }
 
-    // This endopoint is user to pay for the products, updating the user balance, and the user owned products list
+    // This endpoint is user to pay for the products, updating the user balance, and the user owned products list
     @PutMapping("/pay")
     public ResponseEntity<String> payForProducts(@RequestBody List<Product> products,@RequestBody String userId) {
         // Logic to pay for products using QR code
@@ -28,7 +28,7 @@ public class PaymentController {
         return ResponseEntity.ok("Payment successful");
     }
 
-    // qr scan logic, checks if the user has enogh products to retrieve,
+    // qr scan logic, checks if the user has enough products to retrieve,
     // if so, retrieves the products updating the user product list, not the balance
     @PutMapping("/retrieve/{qrCode}")
     public ResponseEntity<String> retrieveProducts(@PathVariable QRCode qrCode) {
