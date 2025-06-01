@@ -1,9 +1,6 @@
 package org.example.summerhackaton.domain.model.products.factory.clothes;
 
 import org.example.summerhackaton.domain.model.products.factory.Product;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document(collection = "products")
 public class ClothingProduct extends Product {
     private String size;
     private String material;

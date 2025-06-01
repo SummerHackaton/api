@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 public class FestivalService {
 
-    private static final String FESTIVAL_COLLECTION = "festival";
+    private static final String FESTIVAL_COLLECTION = "festivals";
 
     private final MongoTemplate mongoTemplate;
 
@@ -31,11 +31,23 @@ public class FestivalService {
 
     public Festival getFestivalByLocation(SimpleLocation simpleLocation) {
         // calculate if simpleLocation is inside the LocationRange (topLeft and bottomRight
+        Double latP = simpleLocation.getX();
+        Double lonP = simpleLocation.getY();
+
+        // Construimos el Query usando los mismos campos y operadores que tu consulta en el shell:
+        // {
+        //   "location.bottomRight.latitude":  { $lte: latP },
+        //   "location.topLeft.latitude":      { $gte: latP },
+        //   "location.topLeft.longitude":     { $lte: lonP },
+        //   "location.bottomRight.longitude": { $gte: lonP }
+        // }
         Query query = new Query();
-        query.addCriteria(Criteria.where("location.topLeft.latitude").lte(simpleLocation.getX())
-                .and("location.bottomRight.latitude").gte(simpleLocation.getX())
-                .and("location.topLeft.longitude").lte(simpleLocation.getY())
-                .and("location.bottomRight.longitude").gte(simpleLocation.getY()));
+        query.addCriteria(
+                Criteria.where("location.bottomRight.latitude").lte(latP)
+                        .and("location.topLeft.latitude").gte(latP)
+                        .and("location.topLeft.longitude").lte(lonP)
+                        .and("location.bottomRight.longitude").gte(lonP)
+        );
         Festival festival = mongoTemplate.findOne(query, Festival.class, FESTIVAL_COLLECTION);
         if (festival == null) {
             throw new IllegalArgumentException("Festival not found for the given location");
