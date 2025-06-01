@@ -23,9 +23,10 @@ public class DeviceLocationVerificationApiService {
     private final OpenGatewayAuthenticationService openGatewayAuthenticationService;
 
     private static final String DEVICE_VERIFICATION_API_URL = "https://sandbox.opengateway.telefonica.com/apigateway/location/v0/verify";
+    private static final String DEVICE_LOCATION_SCOPE = "dpv:FraudPreventionAndDetection#device-location-read";
 
     public boolean isOnFestivalRange(DeviceLocationPetition petition) {
-        String apiToken = openGatewayAuthenticationService.getToken().getAccessToken();
+        String apiToken = openGatewayAuthenticationService.provideToken(DEVICE_LOCATION_SCOPE).getAccessToken();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setBearerAuth(apiToken);

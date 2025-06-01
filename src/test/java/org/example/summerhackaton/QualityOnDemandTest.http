@@ -1,0 +1,27 @@
+###
+POST http://localhost:8080/api/1.0/login?username=b&password=b
+Content-Type: application/json
+
+> {%
+    client.global.set("token",response.body.access)
+%}
+
+###
+POST http://localhost:8080/api/1.0/sessions
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "device": {
+    "phoneNumber": "+34649379033",
+    "ipv4Address": {
+      "publicAddress": "195.55.210.1",
+      "publicPort": 5060
+    }
+  },
+  "applicationServer": {
+    "ipv4Address": "10.19.249.233"
+  },
+  "qosProfile": "1234-1234",
+  "duration": 86400
+}

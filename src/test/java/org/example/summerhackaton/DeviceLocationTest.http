@@ -7,18 +7,13 @@ Content-Type: application/json
 %}
 
 ###
-GET http://localhost:8080/token
-Authorization: Bearer {{token}}
-
-###
 POST http://localhost:8080/api/1.0/verify_location
 Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
   "ueid": {
-    "msisdn": "+34649379033",
-    "ipv4Addr": "192.168.0.0"
+    "msisdn": "+34649379033"
   },
   "latitude": 40.4525075099974,
   "longitude": -3.7972401929128146,
