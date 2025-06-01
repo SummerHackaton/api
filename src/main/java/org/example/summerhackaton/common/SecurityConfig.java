@@ -35,6 +35,7 @@ public class SecurityConfig {
                         req.
                                 requestMatchers(Constantes.PATH_LOGIN).permitAll()
                                 .requestMatchers(Constantes.PATH_REGISTER).permitAll()
+                                .requestMatchers("/api/1.0/festival/findByLocation").permitAll()
                                 .anyRequest()
                                 .authenticated()
                 )

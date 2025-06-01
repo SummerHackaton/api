@@ -1,7 +1,8 @@
 package org.example.summerhackaton.domain.model.products.factory.clothes;
 
-import lombok.Data;
 import org.example.summerhackaton.domain.model.products.factory.Product;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 
 public class ClothingProduct extends Product {
     private String size;

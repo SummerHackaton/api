@@ -1,5 +1,6 @@
 package org.example.summerhackaton.domain.model.festival;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.example.summerhackaton.domain.model.festival.shop.Shop;
@@ -13,6 +14,7 @@ import java.util.List;
 @Document(collection = "festivals")
 @Getter
 @Setter
+@Builder
 public class Festival {
     @Id
     private String id;
@@ -26,6 +28,17 @@ public class Festival {
     public Festival () {
         super();
         this.participations = new ArrayList<>();
+    }
+
+    public Festival(String id, String name, LocationRange location, LocalDate startDate, LocalDate endDate, List<Shop> stores, List<ShopFestivalParticipation> participations) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.location = location;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.stores = stores;
+        this.participations = participations;
     }
 }
 

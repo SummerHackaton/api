@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/1.0/festival")
 public class FestivalController {
 
@@ -31,7 +32,7 @@ public class FestivalController {
     }
 
 
-    @GetMapping("/findByLocation")
+    @PostMapping("/findByLocation")
     public ResponseEntity<Festival> getFestivalByLocation(@RequestBody SimpleLocation simpleLocation) {
         return ResponseEntity.ok(festivalService.getFestivalByLocation(simpleLocation));
     }
