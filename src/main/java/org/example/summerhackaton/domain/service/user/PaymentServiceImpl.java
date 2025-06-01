@@ -35,16 +35,23 @@ public class PaymentServiceImpl implements PaymentService{
 
     @Override
     public void payForProducts(List<Product> products, String userId) {
+        if (products == null || products.isEmpty()) {
+            throw new BadRequestException("La lista de productos no puede estar vacía");
+        }
+
         UserEntity user = userRepository.findById(userId)
-                .orElseThrow(() -> new BadRequestException("User not found"));
+                .orElseThrow(() -> new BadRequestException("Usuario no encontrado"));
 
-        // Sumar los precios usando BigDecimal
         java.math.BigDecimal totalCost = products.stream()
-                .map(product -> product.getPrice())
-                .reduce(java.math.BigDecimal.ZERO, java.math.BigDecimal::add);
+                .map(product -> {
+                    if (product.getPrice() == null) {
+                        throw new BadRequestException("El producto tiene precio nulo");
+                    }
+                    return product.getPrice();
+                }).reduce(java.math.BigDecimal.ZERO, java.math.BigDecimal::add);
 
-        if (user.getBalance().compareTo(totalCost) < 0) {
-            throw new BadRequestException("Insufficient balance");
+        if (user.getBalance().compareTo(totalCost) <= 0) {
+            throw new BadRequestException("Saldo insuficiente");
         }
         user.setBalance(user.getBalance().subtract(totalCost));
         user.getBoughtProducts().addAll(products);
