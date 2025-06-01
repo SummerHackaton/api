@@ -1,4 +1,4 @@
-package org.example.summerhackaton.domain.service.Automator;
+package org.example.summerhackaton.domain.service.automator;
 
 
 import org.example.summerhackaton.domain.model.products.factory.Product;

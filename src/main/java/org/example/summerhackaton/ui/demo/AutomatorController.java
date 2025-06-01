@@ -1,7 +1,7 @@
 package org.example.summerhackaton.ui.demo;
 
 import org.example.summerhackaton.domain.model.products.factory.Product;
-import org.example.summerhackaton.domain.service.Automator.AutomatorService;
+import org.example.summerhackaton.domain.service.automator.AutomatorService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
