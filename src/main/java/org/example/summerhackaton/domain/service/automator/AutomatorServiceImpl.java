@@ -49,7 +49,7 @@ public class AutomatorServiceImpl implements AutomatorService{
             QRCode qrCode = mapper.readValue(json, QRCode.class);
             return json;
         } catch (Exception e) {
-            throw new IllegalArgumentException("Error al parsear el carrito", e);
+            throw new IllegalArgumentException("Error al parsear el carrito porque {}", e);
         }
     }
 }

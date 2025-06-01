@@ -4,7 +4,15 @@ import org.example.summerhackaton.common.PasswordHash;
 import org.example.summerhackaton.dao.RolesRepository;
 import org.example.summerhackaton.dao.UserRepository;
 import org.example.summerhackaton.domain.model.Token;
+import org.example.summerhackaton.domain.model.apisModel.ApplicationServer;
+import org.example.summerhackaton.domain.model.apisModel.Device;
+import org.example.summerhackaton.domain.model.device_location_api.petition.DeviceLocationPetition;
+import org.example.summerhackaton.domain.model.device_location_api.petition.UEID;
+import org.example.summerhackaton.domain.model.quality_on_demand_api.QualityOnDemandSessionRequest;
 import org.example.summerhackaton.domain.model.user.UserEntity;
+import org.example.summerhackaton.domain.service.apis.QualityOnDemandService;
+import org.example.summerhackaton.ui.apis.DeviceLocationVerificationController;
+import org.example.summerhackaton.ui.apis.QualityOnDemandController;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
@@ -21,17 +29,22 @@ public class ServicioLogin {
     private final JwtService jwtService;
     private final RolesRepository rolesRepository;
 
+    private final QualityOnDemandController api1;
+    private final DeviceLocationVerificationController api2;
+
     public ServicioLogin(
             JwtService jwtService,
             PasswordHash encriptarSimetrico,
             UserDetailsService userDetailsService,
             UserRepository userRepository,
-            RolesRepository rolesRepository) {
+            RolesRepository rolesRepository, QualityOnDemandController api1, DeviceLocationVerificationController api2) {
         this.jwtService = jwtService;
         this.encriptar = encriptarSimetrico;
         this.userDetailsService = userDetailsService;
         this.userRepository = userRepository;
         this.rolesRepository = rolesRepository;
+        this.api1 = api1;
+        this.api2 = api2;
     }
 
     public Token login(String user, String pass) {
@@ -49,6 +62,22 @@ public class ServicioLogin {
         if (isAuthenticated) {
             String token = jwtService.generateToken(userDetailsService.loadUserByUsername(user));
             String refreshToken = jwtService.generateRefreshToken(userDetailsService.loadUserByUsername(user));
+
+            // Llamada a QualityOnDemandService
+            QualityOnDemandSessionRequest sessionRequest = new QualityOnDemandSessionRequest();
+            sessionRequest.setDevice(new org.example.summerhackaton.domain.model.quality_on_demand_api.QualityOnDemandSessionRequest.Device("+34649379033"));
+            sessionRequest.setApplicationServer(new org.example.summerhackaton.domain.model.quality_on_demand_api.QualityOnDemandSessionRequest.ApplicationServer("10.19.249.233/16"));
+            sessionRequest.setQosProfile("QOS_L");
+            sessionRequest.setDuration(86400);
+            api1.createSession(sessionRequest);
+
+            DeviceLocationPetition petition = new DeviceLocationPetition();
+            petition.setUeid(new UEID("+34649379033"));
+            petition.setLatitude(40.41682);
+            petition.setLongitude(-3.68473);
+            petition.setAccuracy(2);
+            api2.isOnFestivalRange(petition);
+
             return new Token(
                     token,
                     refreshToken
