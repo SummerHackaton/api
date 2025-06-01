@@ -4,8 +4,5 @@ import lombok.Data;
 
 @Data
 public class UEID {
-    private String externalId;
     private String msisdn;
-    private String ipv4Addr;
-    private String ipv6Addr;
 }

@@ -32,10 +32,12 @@ public class LoginController {
 
     @PostMapping(Constantes.PATH_REGISTER)
     public ResponseEntity<Void> signup(@RequestParam String username,
-                                       @RequestParam String password) {
+                                       @RequestParam String password,
+                                       @RequestParam String phone) {
         final var userEntity = new UserEntity();
         userEntity.setUsername(username);
         userEntity.setPassword(password);
+        userEntity.setPhone(phone);
         userEntity.setEnabled(true);
         userEntity.setRoles(Set.of(new RolesEntity(userEntity.getId(), "USER")));
         return

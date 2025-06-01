@@ -1,6 +1,11 @@
 ###
-POST http://localhost:8080/api/1.0/login?username=b&password=b
+POST http://localhost:8080/api/1.0/login
 Content-Type: application/json
+
+{
+  "username": "b",
+  "password": "b"
+}
 
 > {%
     client.global.set("token",response.body.access)
@@ -13,15 +18,11 @@ Content-Type: application/json
 
 {
   "device": {
-    "phoneNumber": "+34649379033",
-    "ipv4Address": {
-      "publicAddress": "195.55.210.1",
-      "publicPort": 5060
-    }
+    "phoneNumber": "+34649379033"
   },
   "applicationServer": {
-    "ipv4Address": "10.19.249.233"
+    "ipv4Address": "10.19.249.233/16"
   },
-  "qosProfile": "1234-1234",
+  "qosProfile": "QOS_L",
   "duration": 86400
 }

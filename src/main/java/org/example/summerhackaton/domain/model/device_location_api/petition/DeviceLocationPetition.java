@@ -5,7 +5,6 @@ import lombok.Data;
 @Data
 public class DeviceLocationPetition {
     private UEID ueid;
-    private int uePort;
     private double latitude;
     private double longitude;
     private int accuracy;

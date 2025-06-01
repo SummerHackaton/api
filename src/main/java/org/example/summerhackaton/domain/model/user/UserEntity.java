@@ -21,6 +21,7 @@ public class UserEntity {
     private String username;
     private String password;
     private String email;
+    private String phone;
     private boolean enabled;
     private String codigo;
     private Set<RolesEntity> roles;

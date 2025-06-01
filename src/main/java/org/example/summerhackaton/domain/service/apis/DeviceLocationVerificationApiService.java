@@ -39,38 +39,23 @@ public class DeviceLocationVerificationApiService {
         if (petition.getUeid().getMsisdn() != null) {
             ueId.put("msisdn", petition.getUeid().getMsisdn());
         }
-        if (petition.getUeid().getExternalId() != null) {
-            ueId.put("externalId", petition.getUeid().getExternalId());
-        }
-        if (petition.getUeid().getIpv4Addr() != null) {
-            ueId.put("ipv4Addr", petition.getUeid().getIpv4Addr());
-        }
-        if (petition.getUeid().getIpv6Addr() != null) {
-            ueId.put("ipv6Addr", petition.getUeid().getIpv6Addr());
-        }
 
         requestBody.put("ueId", ueId);
-        requestBody.put("uePort", petition.getUePort());
         requestBody.put("latitude", petition.getLatitude());
         requestBody.put("longitude", petition.getLongitude());
         requestBody.put("accuracy", petition.getAccuracy());
 
         HttpEntity<Map<String, Object>> request = new HttpEntity<>(requestBody, headers);
 
-        try {
-            ResponseEntity<DeviceLocationResponse> response = restTemplate.postForEntity(
-                    DEVICE_VERIFICATION_API_URL,
-                    request,
-                    DeviceLocationResponse.class
-            );
+        ResponseEntity<DeviceLocationResponse> response = restTemplate.postForEntity(
+                DEVICE_VERIFICATION_API_URL,
+                request,
+                DeviceLocationResponse.class
+        );
 
-            if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
-                return response.getBody().isVerificationResult();
-            }
-            return false;
-        } catch (Exception e) {
-            // Log the error if needed
-            return false;
+        if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
+            return response.getBody().isVerificationResult();
         }
+        return false;
     }
 }
