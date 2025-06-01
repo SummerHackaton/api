@@ -6,6 +6,8 @@ import org.example.summerhackaton.domain.model.products.factory.ProductFactoryRe
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -25,5 +27,9 @@ public class ProductService {
         }
         Product product = factory.createProduct(attributes);
         return mongoTemplate.save(product);
+    }
+
+    public List<Product> cleanCart(String name) {
+        List<Product> cart = new ArrayList<>();
     }
 }
