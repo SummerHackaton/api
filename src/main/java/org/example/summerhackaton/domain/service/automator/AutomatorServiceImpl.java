@@ -1,11 +1,9 @@
 package org.example.summerhackaton.domain.service.automator;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.summerhackaton.domain.model.products.factory.Product;
 import org.example.summerhackaton.domain.model.user.QRCode;
 import org.example.summerhackaton.ui.user.PaymentController;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Base64;
@@ -32,7 +30,7 @@ public class AutomatorServiceImpl implements AutomatorService{
             paymentController.retrieveProducts(
                                 QRCode.builder()
                                     .productsToRetrieve(cart)
-                                    .userId(SecurityContextHolder.getContext().getAuthentication().getName())
+                                    .userId("64f1b2c3d4e5f67890123456")
                                 .build());
             return true;
         } catch (InterruptedException e) {
@@ -42,13 +40,14 @@ public class AutomatorServiceImpl implements AutomatorService{
     }
 
     @Override
-    public List<Product> parseCart(String bulkCart) {
+    public String parseCart(String bulkCart) {
         //esta la lista en base 64, viene del frontend
         try {
             byte[] decodedBytes = Base64.getDecoder().decode(bulkCart);
             String json = new String(decodedBytes);
             ObjectMapper mapper = new ObjectMapper();
-            return mapper.readValue(json, new TypeReference<List<Product>>() {});
+            QRCode qrCode = mapper.readValue(json, QRCode.class);
+            return json;
         } catch (Exception e) {
             throw new IllegalArgumentException("Error al parsear el carrito", e);
         }

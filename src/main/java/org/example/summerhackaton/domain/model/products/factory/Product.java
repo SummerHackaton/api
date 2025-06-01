@@ -26,6 +26,11 @@ public class Product {
         this.quantity = quantity;
     }
 
+    public Product(String name, BigDecimal price) {
+        this.name = name;
+        this.price = price;
+    }
+
     // Getters y setters
     public String getId() {
         return id;

@@ -36,6 +36,7 @@ public class SecurityConfig {
                                 .requestMatchers(Constantes.BASE_URL+Constantes.PATH_REGISTER).permitAll().
                                 requestMatchers(Constantes.PATH_LOGIN).permitAll()
                                 .requestMatchers(Constantes.PATH_REGISTER).permitAll()
+                                .requestMatchers("/api/1.0/automator/canjeador-demo/**").permitAll()
                                 .requestMatchers("/api/1.0/festival/findByLocation").permitAll()
                                 .anyRequest()
                                 .authenticated()

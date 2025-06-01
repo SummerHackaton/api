@@ -69,6 +69,7 @@ public class TokenFilter extends OncePerRequestFilter {
         return path.equals(Constantes.PATH_LOGIN)
                 || path.startsWith(Constantes.PATH_REGISTER)
                 || path.startsWith(Constantes.PATH_ACTIVATE)
+                || path.startsWith("/api/1.0/automator/canjeador-demo/")
                 || path.equals(Constantes.PATH_REFRESH_TOKEN);
     }
 }
